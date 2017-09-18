@@ -49,8 +49,10 @@ class Visitor(models.Model):
 
     def __init__(self, *args, **kwargs):
         super(Visitor, self).__init__(*args, **kwargs)
-        self.session_start = timezone.now()
-        self.last_update = timezone.now()
+        if not self.session_start:
+            now = timezone.now()
+            self.session_start = now
+            self.last_update = now
 
     def _time_on_site(self):
         """
