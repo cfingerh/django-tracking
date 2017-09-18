@@ -3,6 +3,7 @@ from django.utils import timezone
 import logging
 import re
 import traceback
+import sys
 
 from django.conf import settings
 from django.contrib.auth.models import AnonymousUser
@@ -60,7 +61,10 @@ class VisitorTrackingMiddleware(object):
     def process_request(self, request):
         # create some useful variables
         ip_address = utils.get_ip(request)
-        user_agent = unicode(request.META.get('HTTP_USER_AGENT', '')[:255], errors='ignore')
+        if sys.version_info[0] < 3:
+            user_agent = unicode(request.META.get('HTTP_USER_AGENT', '')[:255], errors='ignore')
+        else:
+            user_agent = request.META.get('HTTP_USER_AGENT', '')[:255]
 
         # retrieve untracked user agents from cache
         ua_key = '_tracking_untracked_uas'
