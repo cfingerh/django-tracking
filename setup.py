@@ -23,12 +23,15 @@ setup(
     maintainer='Basil Shubin',
     maintainer_email='basil.shubin@gmail.com',
     install_requires=[
-        'django>=1.4',
+        'django>=1.10',
+        'geoip2>=2.6.0',
     ],
     classifiers=[
         "Development Status :: 5 - Production/Stable",
         "Environment :: Web Environment",
         "Framework :: Django",
+        "Framework :: Django :: 1.10",
+        "Framework :: Django :: 2.0",
         "Intended Audience :: Developers",
         "Intended Audience :: Information Technology",
         "Intended Audience :: System Administrators",

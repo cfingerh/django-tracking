@@ -6,9 +6,9 @@ import traceback
 import sys
 
 from django.conf import settings
+from django.urls import reverse, NoReverseMatch
 from django.contrib.auth.models import AnonymousUser
 from django.core.cache import cache
-from django.core.urlresolvers import reverse, NoReverseMatch
 from django.db.utils import DatabaseError, IntegrityError
 from django.http import Http404
 from django.db import transaction
