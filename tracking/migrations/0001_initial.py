@@ -50,7 +50,7 @@ class Migration(migrations.Migration):
                 ('page_views', models.PositiveIntegerField(default=0)),
                 ('session_start', models.DateTimeField()),
                 ('last_update', models.DateTimeField()),
-                ('user', models.ForeignKey(to=settings.AUTH_USER_MODEL, null=True)),
+                ('user', models.ForeignKey(null=True, on_delete=models.deletion.CASCADE, to=settings.AUTH_USER_MODEL)),
             ],
             options={
                 'ordering': ('-last_update',),
