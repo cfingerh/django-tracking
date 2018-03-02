@@ -1,9 +1,7 @@
 from django.conf import settings
-import re
 import unicodedata
+import ipaddress
 
-# this is not intended to be an all-knowing IP address regex
-IP_RE = re.compile('\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}')
 
 def get_ip(request):
     """
@@ -18,19 +16,15 @@ def get_ip(request):
     # if neither header contain a value, just use local loopback
     ip_address = request.META.get('HTTP_X_FORWARDED_FOR',
                                   request.META.get('REMOTE_ADDR', '127.0.0.1'))
-    return ip_address
     if ip_address:
         # make sure we have one and only one IP
+        if ',' in ip_address:
+            ip_address = ip_address.split(',')[0].strip()
+        # check if IP address is valid
         try:
-            ip_address = IP_RE.match(ip_address)
-            if ip_address:
-                ip_address = ip_address.group(0)
-            else:
-                # no IP, probably from some dirty proxy or other device
-                # throw in some bogus IP
-                ip_address = '10.0.0.1'
-        except IndexError:
-            pass
+            ipaddress.ip_address(ip_address)
+        except:
+            ip_address = ip_address[:39]
 
     return ip_address
 

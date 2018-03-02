@@ -22,15 +22,15 @@ setup(
     author_email='codekoala@gmail.com',
     maintainer='Basil Shubin',
     maintainer_email='basil.shubin@gmail.com',
+    python_requires='>=3.4',
     install_requires=[
-        'django>=1.10',
+        'django>=2.0',
         'geoip2>=2.6.0',
     ],
     classifiers=[
         "Development Status :: 5 - Production/Stable",
         "Environment :: Web Environment",
         "Framework :: Django",
-        "Framework :: Django :: 1.10",
         "Framework :: Django :: 2.0",
         "Intended Audience :: Developers",
         "Intended Audience :: Information Technology",
